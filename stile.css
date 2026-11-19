@@ -1,0 +1,296 @@
+/* La Festa delle Medie — foglio di stile */
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('fonts/archivo.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Literata';
+  src: url('fonts/literata.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Literata';
+  src: url('fonts/literata-corsivo.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --nebbia: #E4E8E5;      /* fondo: il lago al mattino */
+  --inchiostro: #17303A;  /* testo: il lago di notte */
+  --lago: #2D5662;
+  --pietra: #56605D;      /* testi secondari */
+  --alba: #D8A23E;        /* solo per i concerti all'alba */
+  --alba-bordo: #9A6B12;
+  --riga: #B7C2BE;
+  --riga-chiara: #CCD4D1;
+
+  --sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Literata', Georgia, 'Times New Roman', serif;
+  --margine: clamp(20px, 5vw, 56px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--nebbia);
+  color: var(--inchiostro);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--lago); outline-offset: 3px; border-radius: 2px; }
+
+p { margin: 0 0 1em; }
+
+.salta {
+  position: absolute; left: var(--margine); top: -100px;
+  background: var(--inchiostro); color: var(--nebbia);
+  padding: 8px 14px; font-family: var(--sans); z-index: 10;
+}
+.salta:focus { top: 12px; }
+
+/* ------------------------------------------------------------- barra */
+
+.barra {
+  display: flex; justify-content: space-between; align-items: baseline;
+  max-width: 1160px; margin: 0 auto; padding: 28px var(--margine) 0;
+  font-family: var(--sans);
+}
+.barra ul { display: flex; gap: clamp(16px, 3vw, 32px); list-style: none; margin: 0; padding: 0; }
+.barra nav a { font-size: 1rem; font-weight: 500; text-decoration: none; }
+.barra nav a:hover, .barra nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; }
+.marchio {
+  font-stretch: 120%; font-weight: 800; font-size: 1.05rem;
+  text-decoration: none; letter-spacing: -0.005em;
+}
+
+main { max-width: 1160px; margin: 0 auto; padding: 0 var(--margine); }
+
+/* ------------------------------------------------------------- apertura */
+
+.apertura { padding-top: clamp(64px, 13vh, 150px); }
+
+.apertura h1 {
+  margin: 0;
+  font-family: var(--sans);
+  font-stretch: 125%;
+  font-weight: 820;
+  font-size: clamp(3.1rem, 10.5vw, 9.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+}
+
+.motto {
+  margin: clamp(22px, 3vw, 36px) 0 0;
+  max-width: 30ch;
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  line-height: 1.4;
+  color: var(--lago);
+}
+
+/* ------------------------------------------------------------- estate */
+
+.estate { margin-top: clamp(80px, 12vw, 150px); }
+
+.estate-testa { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 24px; margin-bottom: 20px; }
+.estate-testa h2 {
+  margin: 0; font-family: var(--sans); font-stretch: 112%; font-weight: 700;
+  font-size: 1.5rem; letter-spacing: -0.01em;
+}
+.estate-testa p { margin: 0; color: var(--pietra); }
+
+.partitura { display: block; width: 100%; height: auto; }
+.partitura.stretta { display: none; }
+@media (max-width: 700px) {
+  .partitura.larga { display: none; }
+  .partitura.stretta { display: block; }
+  .stretta .p-mese { font-size: 13px; }
+  .stretta .p-luogo { font-size: 15px; }
+  .stretta .p-num { font-size: 12px; }
+}
+
+.p-mese { font-family: var(--sans); font-size: 17px; font-weight: 600; fill: var(--lago); }
+.p-luogo { font-family: var(--sans); font-size: 21px; font-weight: 600; font-stretch: 105%; fill: var(--inchiostro); }
+.p-num { font-family: var(--sans); font-size: 14px; fill: var(--pietra); text-anchor: middle; font-variant-numeric: tabular-nums; }
+.p-rigo { stroke: var(--riga); stroke-width: 1; }
+.p-confine { stroke: var(--riga); stroke-width: 1; stroke-dasharray: 2 4; }
+.p-tacca { stroke: var(--pietra); stroke-width: 1; }
+.p-nota { fill: var(--inchiostro); }
+.p-alba { fill: var(--alba); stroke: var(--alba-bordo); stroke-width: 1; }
+
+.p-evento {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: comparsa 0.45s cubic-bezier(.2,.7,.3,1) both;
+  animation-delay: calc(var(--i) * 22ms + 250ms);
+}
+@keyframes comparsa { from { opacity: 0; transform: scale(0.2); } }
+@media (prefers-reduced-motion: reduce) { .p-evento { animation: none; } }
+
+.legenda {
+  display: flex; flex-wrap: wrap; gap: 8px 28px;
+  list-style: none; margin: 14px 0 0; padding: 0;
+  font-family: var(--sans); font-size: 0.9rem; color: var(--pietra);
+}
+.legenda li { display: flex; align-items: center; gap: 8px; }
+.legenda svg { width: 18px; height: 18px; flex: none; }
+.legenda circle { fill: var(--inchiostro); }
+.legenda .alba { fill: var(--alba); stroke: var(--alba-bordo); stroke-width: 1; }
+.legenda line { stroke: var(--riga); stroke-width: 1.2; }
+
+/* ------------------------------------------------------------- progetti */
+
+.progetti { margin-top: clamp(96px, 13vw, 160px); }
+
+.progetti > h2, .chi h2 {
+  margin: 0 0 clamp(28px, 4vw, 44px);
+  font-family: var(--sans); font-stretch: 115%; font-weight: 750;
+  font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.05; letter-spacing: -0.015em;
+}
+
+.progetto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 16px clamp(24px, 5vw, 64px);
+  padding: clamp(32px, 4vw, 48px) 0;
+  border-top: 1px solid var(--riga);
+}
+
+.luogo {
+  margin: 0;
+  font-family: var(--sans); font-stretch: 112%; font-weight: 650;
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem); line-height: 1.1; letter-spacing: -0.01em;
+}
+.periodo { margin: 8px 0 0; font-style: italic; font-size: 1rem; color: var(--pietra); }
+
+.progetto-dove { align-self: start; position: sticky; top: 24px; }
+.progetto-corpo { max-width: 40em; }
+.progetto h3 {
+  margin: 0 0 0.6em;
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.5rem, 2.6vw, 1.9rem); line-height: 1.2; letter-spacing: -0.005em;
+}
+.progetto .sottotitolo { margin: -0.5em 0 0.9em; font-style: italic; color: var(--lago); font-size: 1.2rem; }
+.crediti {
+  font-family: var(--sans); font-size: 0.95rem; line-height: 1.55; color: var(--pietra);
+  max-width: 60ch;
+}
+
+.programma { margin-top: 1.4em; }
+.programma summary {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  cursor: pointer; list-style: none;
+  font-family: var(--sans); font-weight: 600; font-size: 1rem; color: var(--lago);
+}
+.programma summary::-webkit-details-marker { display: none; }
+.programma summary::before {
+  content: '+'; display: inline-block; width: 0.8em;
+  font-weight: 500; font-size: 1.2em; line-height: 1;
+}
+.programma[open] summary::before { content: '−'; }
+.programma summary span { font-weight: 400; color: var(--pietra); }
+.programma summary:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+.programma ol { list-style: none; margin: 16px 0 0; padding: 0; }
+.programma li {
+  display: grid; grid-template-columns: 11.5em minmax(0, 1fr); gap: 4px 20px;
+  padding: 12px 0; border-top: 1px solid var(--riga-chiara);
+  font-size: 1rem; line-height: 1.55;
+}
+.programma time {
+  font-family: var(--sans); font-size: 0.92rem; font-weight: 500;
+  font-variant-numeric: tabular-nums; padding-top: 0.12em;
+}
+.programma li.alba time::after {
+  content: ''; display: inline-block; vertical-align: 0.05em;
+  width: 12px; height: 6px; margin-left: 8px;
+  border-radius: 6px 6px 0 0; background: var(--alba);
+  box-shadow: 0 1px 0 var(--alba-bordo);
+}
+
+/* ------------------------------------------------------------- chi siamo */
+
+.chi {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 16px clamp(24px, 5vw, 64px);
+  margin-top: clamp(32px, 5vw, 64px);
+  padding: clamp(32px, 4vw, 48px) 0 clamp(80px, 10vw, 120px);
+  border-top: 1px solid var(--riga);
+}
+.chi h2 { margin: 0; font-size: clamp(1.4rem, 2.4vw, 1.75rem); font-stretch: 112%; font-weight: 650; }
+.chi-testo { max-width: 40em; }
+.chi-testo p:first-child { font-size: 1.25rem; line-height: 1.55; }
+
+/* ------------------------------------------------------------- piede */
+
+.piede {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px clamp(24px, 5vw, 64px);
+  background: var(--inchiostro); color: var(--nebbia);
+  padding: clamp(40px, 6vw, 64px) max(var(--margine), calc((100vw - 1160px) / 2 + var(--margine)));
+  font-family: var(--sans); font-size: 0.95rem; line-height: 1.6;
+}
+.piede p { margin: 0 0 0.6em; }
+.piede-nome { font-stretch: 115%; font-weight: 750; font-size: 1.2rem; letter-spacing: -0.005em; }
+.piede a { color: var(--nebbia); }
+.piede :focus-visible { outline-color: var(--alba); }
+
+/* ------------------------------------------------------------- trasparenza */
+
+.pagina { padding-bottom: clamp(80px, 10vw, 120px); }
+.pagina h1 {
+  margin: clamp(56px, 10vh, 110px) 0 clamp(40px, 6vw, 64px);
+  font-family: var(--sans); font-stretch: 125%; font-weight: 820;
+  font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: 0.95; letter-spacing: -0.025em;
+}
+.pagina h2 {
+  margin: 0 0 18px;
+  font-family: var(--sans); font-stretch: 112%; font-weight: 700;
+  font-size: 1.5rem; letter-spacing: -0.01em;
+}
+.pagina section + section { margin-top: clamp(56px, 7vw, 88px); }
+
+.dati { margin: 0; }
+.dati div {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 4px clamp(24px, 5vw, 64px);
+  padding: 14px 0; border-top: 1px solid var(--riga);
+}
+.dati div:last-child { border-bottom: 1px solid var(--riga); }
+.dati dt { font-family: var(--sans); font-size: 0.95rem; font-weight: 600; color: var(--pietra); padding-top: 0.15em; }
+.dati dd { margin: 0; }
+
+.tabella { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.tabella th { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; color: var(--pietra); text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--riga); }
+.tabella td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--riga-chiara); vertical-align: top; }
+.documenti { list-style: none; padding: 0; margin: 0; }
+.documenti li { padding: 10px 0; border-top: 1px solid var(--riga-chiara); }
+
+/* ------------------------------------------------------------- schermi stretti */
+
+@media (max-width: 760px) {
+  body { font-size: 1.0625rem; }
+  .progetto, .chi, .dati div { grid-template-columns: minmax(0, 1fr); }
+  .progetto-dove { position: static; }
+  .programma li { grid-template-columns: minmax(0, 1fr); }
+  .piede { grid-template-columns: minmax(0, 1fr); }
+  .barra { justify-content: flex-end; }
+  .trasparenza .barra { justify-content: space-between; }
+}
